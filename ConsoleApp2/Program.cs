@@ -30,6 +30,7 @@ class program
                 case ConsoleKey.D3:
                     avto_type = 3;
                     break;
+
             }
             Console.WriteLine();
 
@@ -57,17 +58,17 @@ class program
 
             double fuel_per_km = 0;
 
-            switch (avto_type)
+            if (speed > 0 && speed < 50)
             {
-                case 1:
-                    fuel_per_km = 0.03;
-                    break;
-                case 2:
-                    fuel_per_km = 0.08;
-                    break;
-                case 3:
-                    fuel_per_km = 0.2;
-                    break;
+                fuel_per_km = 0.05;
+            }
+            else if (speed > 50 && speed < 90)
+            {
+                fuel_per_km = 0.1;
+            }
+            else
+            {
+                fuel_per_km = 0.2;
             }
 
             double fuel_required = calculate_fuel_required(distance, speed, fuel_per_km);
@@ -81,7 +82,7 @@ class program
             }
             else
             {
-                Console.WriteLine($"Транспортное средство сможет преодолеть максимальное расстояние в {max_distance:F2} км на одном баке.");
+                Console.WriteLine($"Транспортное средство не сможет преодолеть расстояние в  {distance} км на одном баке. Одного бака хвататит на {max_distance:F2} км.");
             }
 
             Console.WriteLine("\nЖелаете запустить программу заново?: \n1 - да \n2 - нет");
@@ -97,7 +98,7 @@ class program
 
     static double calculate_fuel_required(double distance, double speed, double fuel_per_km)
     {
-        double fuel_required = (distance / 100) * fuel_per_km * speed;
+        double fuel_required = distance * fuel_per_km;
         return fuel_required;
     }
 
